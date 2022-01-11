@@ -3,7 +3,7 @@ name: Create and publish a Docker image to GitHub Container Registry
 on:
   workflow_call:
     inputs:
-      name:
+      image_name:
         required: true
         type: string
       tag:
@@ -41,4 +41,4 @@ jobs:
           context: ${{inputs.context_path}}
           file: ${{inputs.file_path}}
           push: true
-          tags: ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:${{inputs.tag}}
+          tags: ghcr.io/${{inputs.image_name}}:${{inputs.tag}}
