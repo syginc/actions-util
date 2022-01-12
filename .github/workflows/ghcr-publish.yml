@@ -45,3 +45,5 @@ jobs:
           file: ${{ inputs.file_path }}
           push: true
           tags: ${{ env.REGISTRY }}/${{ inputs.image_name }}:${{ inputs.tag }}
+
+# TODO: slack notify
