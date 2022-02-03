@@ -53,7 +53,7 @@ jobs:
         with:
           status: ${{ job.status }}
           author_name: ${{ inputs.image_name }}
-          fields: repo,message,commit,author,action,job,took,eventName,ref,workflow # TODO: Remove unused
+          fields: message,commit,author,action,eventName,workflow # TODO: enable took
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.slack_webhook_url }}
