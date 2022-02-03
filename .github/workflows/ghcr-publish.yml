@@ -20,6 +20,8 @@ on:
         required: true
       registry_password:
         required: true
+      slack_webhook_url:
+        required: true
 
 env:
   REGISTRY: ghcr.io
@@ -46,4 +48,13 @@ jobs:
           push: true
           tags: ${{ env.REGISTRY }}/${{ inputs.image_name }}:${{ inputs.tag }}
 
-# TODO: slack notify
+      - name: Notify to Slack
+        uses: 8398a7/action-slack@v3.8.0
+        with:
+          status: ${{ job.status }}
+          author_name: ${{ inputs.image_name }}
+          fields: message,commit,author,action,eventName,workflow # TODO: enable took
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.slack_webhook_url }}
+        if: always()
